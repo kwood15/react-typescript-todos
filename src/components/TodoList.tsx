@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+import { ITodo } from '../shared/interfaces/ITodo';
+import { TodoItem } from './TodoItem';
 
-type Todos = {
-  id: number,
-  title: string,
-  completed: boolean
-}
+type TodoListProps = {
+  todos: ITodo[];
+  onDelete: (todo: ITodo) => void;
+};
 
-interface IProps {
-  todos: Todos[]
-}
-
-const TodoList: React.FunctionComponent<IProps> = ({ todos }: IProps) => (
-  <>
-    {todos.map(({ id, title, completed }: Todos) => <p key={id}>{title}{completed}</p>)}
-  </>
+export const TodoList: FunctionComponent<TodoListProps> = ({
+  todos,
+  onDelete
+}) => (
+  <ul>
+    {todos.map((todo: ITodo) => (
+      <TodoItem key={todo.id} todo={todo} onDelete={onDelete} />
+    ))}
+  </ul>
 );
-
-export default TodoList;
