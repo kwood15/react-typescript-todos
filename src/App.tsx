@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import TodoList from './components/TodoList';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type Todos = {
+  id: number,
+  title: string,
+  completed: boolean
+}
+
+interface IState {
+  todos: Todos[]
+}
+
+class App extends Component<{}, IState> {
+  state = {
+    todos: []
+  }
+
+  componentDidMount() {
+    this.setState({
+      todos: [
+        {
+          id: 1,
+          title: 'Passport',
+          completed: false
+        },
+        {
+          id: 2,
+          title: 'Charger',
+          completed: false
+        },
+        {
+          id: 3,
+          title: 'Travel Insurance',
+          completed: false
+        },
+      ]
+    })
+  }
+  
+  public render() {
+    const { todos } = this.state;
+
+    return (
+      <TodoList todos={todos} />
+    );
+  }
 }
 
 export default App;
