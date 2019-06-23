@@ -13,7 +13,7 @@ export const TodoItem: FunctionComponent<TodoItemProps> = ({ todo, onDelete }) =
 
   return (
     <li>
-      {todo.title} <button onClick={onClick}>X</button>
+      {todo.title} <button className="button is-primary" onClick={onClick}>X</button>
     </li>
   );
 };

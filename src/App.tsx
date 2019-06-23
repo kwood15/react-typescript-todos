@@ -3,6 +3,7 @@ import { ITodo } from './shared/interfaces/ITodo';
 import { AddTodoItem } from './components/AddTodoItem';
 import { TodoList } from './components/TodoList';
 import uuidv4 from 'uuid/v4';
+import './custom.scss';
 
 type AppState = {
   newTodo: ITodo;
@@ -54,13 +55,15 @@ class App extends Component<{}, AppState> {
 
   private addTodo = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.setState((previousState: AppState) => ({
-      newTodo: {
-        id: previousState.newTodo.id,
-        title: ''
-      },
-      todos: [...previousState.todos, previousState.newTodo]
-    }));
+    if (this.state.newTodo.title !== '') {
+      this.setState((previousState: AppState) => ({
+        newTodo: {
+          id: uuidv4(),
+          title: ''
+        },
+        todos: [...previousState.todos, previousState.newTodo]
+      }));
+    }
   };
 
   private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,9 +78,7 @@ class App extends Component<{}, AppState> {
   private deleteTodo = (todoToDelete: ITodo) => {
     this.setState((previousState: AppState) => {
       return {
-        todos: [
-          ...previousState.todos.filter(todo => todo.id !== todoToDelete.id)
-        ]
+        todos: [...previousState.todos.filter(todo => todo.id !== todoToDelete.id)]
       };
     });
   };
