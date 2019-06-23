@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { ITodo } from './shared/interfaces/ITodo';
 import { AddTodoItem } from './components/AddTodoItem';
 import { TodoList } from './components/TodoList';
+import uuidv4 from 'uuid/v4';
 
 type AppState = {
   newTodo: ITodo;
   todos: ITodo[];
-}
+};
 
 class App extends Component<{}, AppState> {
   state = {
     newTodo: {
-      id: 0,
+      id: '',
       title: ''
     },
     todos: []
@@ -21,15 +22,15 @@ class App extends Component<{}, AppState> {
     this.setState({
       todos: [
         {
-          id: 1,
+          id: '',
           title: 'Passport'
         },
         {
-          id: 2,
+          id: '',
           title: 'Suncream'
         },
         {
-          id: 3,
+          id: '',
           title: 'Euros'
         }
       ]
@@ -41,7 +42,11 @@ class App extends Component<{}, AppState> {
     return (
       <div>
         <h2>Holiday Checklist</h2>
-        <AddTodoItem onChange={this.handleChange} onAdd={this.addTodo} todo={newTodo} />
+        <AddTodoItem
+          onChange={this.handleChange}
+          onAdd={this.addTodo}
+          todo={newTodo}
+        />
         <TodoList todos={todos} onDelete={this.deleteTodo} />
       </div>
     );
@@ -51,7 +56,7 @@ class App extends Component<{}, AppState> {
     event.preventDefault();
     this.setState((previousState: AppState) => ({
       newTodo: {
-        id: previousState.newTodo.id + 100,
+        id: previousState.newTodo.id,
         title: ''
       },
       todos: [...previousState.todos, previousState.newTodo]
@@ -70,7 +75,9 @@ class App extends Component<{}, AppState> {
   private deleteTodo = (todoToDelete: ITodo) => {
     this.setState((previousState: AppState) => {
       return {
-        todos: [...previousState.todos.filter(todo => todo.id !== todoToDelete.id)]
+        todos: [
+          ...previousState.todos.filter(todo => todo.id !== todoToDelete.id)
+        ]
       };
     });
   };
