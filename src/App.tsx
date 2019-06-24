@@ -23,34 +23,19 @@ class App extends Component<{}, AppState> {
     this.setState({
       todos: [
         {
-          id: '',
+          id: uuidv4(),
           title: 'Passport'
         },
         {
-          id: '',
+          id: uuidv4(),
           title: 'Suncream'
         },
         {
-          id: '',
+          id: uuidv4(),
           title: 'Euros'
         }
       ]
     });
-  }
-
-  render() {
-    const { todos, newTodo } = this.state;
-    return (
-      <div>
-        <h2>Holiday Checklist</h2>
-        <AddTodoItem
-          onChange={this.handleChange}
-          onAdd={this.addTodo}
-          todo={newTodo}
-        />
-        <TodoList todos={todos} onDelete={this.deleteTodo} />
-      </div>
-    );
   }
 
   private addTodo = (event: React.FormEvent<HTMLFormElement>) => {
@@ -75,13 +60,29 @@ class App extends Component<{}, AppState> {
     });
   };
 
-  private deleteTodo = (todoToDelete: ITodo) => {
+  private deleteTodo = (id: string) => {
     this.setState((previousState: AppState) => {
       return {
-        todos: [...previousState.todos.filter(todo => todo.id !== todoToDelete.id)]
+        todos: [...previousState.todos.filter(todo => todo.id !== id)]
       };
     });
   };
+
+  render() {
+    const { todos, newTodo } = this.state;
+    return (
+      <div>
+        <h2>Holiday Checklist</h2>
+        <AddTodoItem
+          onChange={this.handleChange}
+          onAdd={this.addTodo}
+          todo={newTodo}
+          placeholder="Add Todo"
+        />
+        <TodoList todos={todos} onDelete={this.deleteTodo} />
+      </div>
+    );
+  }
 }
 
 export default App;

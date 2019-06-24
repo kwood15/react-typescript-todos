@@ -5,6 +5,7 @@ type AddTodoItemProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onAdd: (event: React.FormEvent<HTMLFormElement>) => void;
   todo: ITodo;
+  placeholder: string;
 }
 
 export const AddTodoItem: FunctionComponent<AddTodoItemProps> = ({

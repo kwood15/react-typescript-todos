@@ -5,16 +5,16 @@ import uuidv4 from  'uuid/v4';
 
 type TodoListProps = {
   todos: ITodo[];
-  onDelete: (todo: ITodo) => void;
+  onDelete: (id: string) => void;
 };
 
 export const TodoList: FunctionComponent<TodoListProps> = ({
   todos,
   onDelete
-}: TodoListProps) => (
+}) => (
   <ul>
     {todos.map((todo: ITodo) => (
-      <TodoItem key={uuidv4()} todo={todo} onDelete={onDelete} />
+      <TodoItem key={uuidv4()} id={todo.id} todo={todo} onDelete={onDelete} />
     ))}
   </ul>
 );
