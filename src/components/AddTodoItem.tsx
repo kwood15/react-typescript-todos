@@ -5,7 +5,6 @@ type AddTodoItemProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onAdd: (event: React.FormEvent<HTMLFormElement>) => void;
   todo: ITodo;
-  placeholder: string;
 }
 
 export const AddTodoItem: FunctionComponent<AddTodoItemProps> = ({
@@ -14,7 +13,7 @@ export const AddTodoItem: FunctionComponent<AddTodoItemProps> = ({
   todo
 }) => (
   <form onSubmit={onAdd}>
-    <input type="text" onChange={onChange} value={todo.title} />
+    <input type="text" placeholder="Add Todo" onChange={onChange} value={todo.title} />
     <button type="submit">Add a todo</button>
   </form>
 );

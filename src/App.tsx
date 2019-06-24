@@ -86,7 +86,6 @@ class App extends Component<{}, AppState> {
           onChange={this.handleChange}
           onAdd={this.addTodo}
           todo={newTodo}
-          placeholder="Add Todo"
         />
         <TodoList todos={todos} onDelete={this.deleteTodo} />
       </div>

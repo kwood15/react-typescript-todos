@@ -13,7 +13,7 @@ export const TodoList: FunctionComponent<TodoListProps> = ({
 }) => (
   <ul>
     {todos.map((todo: ITodo) => (
-      <TodoItem key={todo.id} id={todo.id} todo={todo} onDelete={onDelete} />
+      <TodoItem key={todo.id} todo={todo} onDelete={onDelete} />
     ))}
   </ul>
 );
