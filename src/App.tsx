@@ -20,6 +20,10 @@ class App extends Component<{}, AppState> {
   };
 
   componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
     this.setState({
       todos: [
         {
@@ -41,13 +45,18 @@ class App extends Component<{}, AppState> {
   private addTodo = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (this.state.newTodo.title !== '') {
-      this.setState((previousState: AppState) => ({
+      const newTodo = {
+        id: uuidv4(),
+        title: this.state.newTodo.title
+      };
+
+      this.setState({
         newTodo: {
-          id: uuidv4(),
+          id: '',
           title: ''
         },
-        todos: [...previousState.todos, previousState.newTodo]
-      }));
+        todos: [...this.state.todos, newTodo]
+      });
     }
   };
 
